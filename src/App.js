@@ -1,33 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-import Axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState } from "react";
+import { LoginForm, RecipeList, Logout } from "./components/index";
 
 function App() {
-  const [listOfUsers, setListOfUsers] = useState ([]);
-  const [name, setName] = useState("");
-  const [age, setAge] = useState(0);
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    Axios.get("http://localhost:3001/getUsers").then((response) => {
-      setListOfUsers(response.data);
-    });
-  }, []);
+  const [ user, setUser ] = useState();
+  const [ viewPage, setViewPage ] = useState("login");
   
-  const createUser = () => {
-    Axios.post("http://localhost:3001/createUser", {
-      name: "",
-      age: 0,
-      username: "",
-    }).then((response) => {
-      alert("USER CREATED");
-    });
-  };
- 
   return (
     <div className="App">
-       
+      <header className="App-header">
+      </header>
+      <div className="App-Content">
+        <LoginForm setUser={ setUser } />
+        <Logout setUser={ setUser }/>
+        <RecipeList />
+      </div>
     </div>
   );
 }
